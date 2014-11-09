@@ -1,1 +1,1 @@
-This is a skeleton of directory structure for general c project
+This is a generic skeleton for c project
