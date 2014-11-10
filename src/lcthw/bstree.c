@@ -136,18 +136,90 @@ int BSTree_traverse(BSTree *map, BSTree_traverse_cb traverse_cb) {
 }
 
 static inline BSTreeNode *BSTree_find_min(BSTreeNode *node) {
+    while(node->left) 
+    	node = node->left;
+    return node;
 }
 
 static inline void BSTree_replace_node_in_parent(BSTree *map, BSTreeNode *node,
         BSTreeNode *new_value) {
+
+    if(node->parent) {
+    	if(node == node->parent->left) {
+            node->parent->left = new_value;
+        } else {
+            node->parent->right = new_value;
+        }
+    } else {
+        map->root = new_value;
+    }
+
+    if(new_value) {
+        new_value->parent = node->parent;
+    }
+     
 }
 
 static inline void BSTree_swap(BSTreeNode *a, BSTreeNode *b) {
+
+    void *tmp = NULL;
+    tmp = b->key;
+    b->key = a->key;
+    a->key = tmp;
+
+    tmp = b->data;
+    b->data = a->data;
+    a->data = tmp;
 }
 
 static inline BSTreeNode* BSTree_node_delete(BSTree *map, BSTreeNode *node, 
         void *key) {
+
+    int cmp = map->compare(node->key, key); 
+    
+    if(cmp < 0) {
+        if(node->left)
+            return BSTree_node_delete(map, node->left, key);     
+        else
+            return NULL; 
+    } else if (cmp > 0) {
+        if(node->right) 
+            return BSTree_node_delete(map, node->right, key);     
+        else
+            return NULL; 
+    } else {
+        if(node->left && node->right) {
+          BSTreeNode *successor = BSTree_find_min(node);
+          // exchange the content of node and the successor
+          BSTree_swap(node, successor);
+          // old successor may have a right child
+          BSTree_replace_node_in_parent(map, successor, successor->right);
+
+        } else if (node->left) {
+          BSTree_replace_node_in_parent(map, node, node->left);
+        } else if (node->right) {
+          BSTree_replace_node_in_parent(map, node, node->right);
+        } else {
+          BSTree_replace_node_in_parent(map, node, NULL);
+        }
+    }
+    
+    return node;
+
 }
 
 void *BSTree_delete(BSTree *map, void *key) {
+
+    void *data = NULL;
+    
+    if(map->root) {
+        BSTreeNode *node = BSTree_node_delete(map, map->root, key);
+        if (node) {
+            data = node->data;
+            free(node);
+        } 
+    }
+
+    return data;
+
 }
