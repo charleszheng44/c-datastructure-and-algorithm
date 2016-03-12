@@ -1,1 +1,1 @@
-This is a generic skeleton for c project
+standard skeleton for c project
