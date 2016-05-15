@@ -18,14 +18,26 @@ SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
 # The Target Build
 all: $(TARGET) $(SO_TARGET) tests
+
 dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
 dev: all
 
 # -fPIC generate position-independent code(PIC)
+# In computing, position-independent code (PIC) or position-independent 
+# executable (PIE) is a body of machine code that, being placed somewhere 
+# in the primary memory, executes properly regardless of its absolute 
+# address. PIC is commonly used for shared libraries, so that the same library 
+# code can be loaded in a location in each program address space where 
+# it will not overlap any other uses of memory (for example, other shared 
+# libraries). (from wiki)
 # ar is used to do the packaging for a static library. With ar, you can 
 # push all object files into a single archive. Or multiple archives 
 # together. So instead of a 1000 source files, you get a single archive, 
 # which you can use with gcc.
+# [r] replace existing or insert new file(s) into the archive
+# [c] do not warn if the library had to be created
+# [s] create an archive index(cf. ranlib)
+#
 # This archive needs an index for gcc to make use of. So, ranlib can do 
 # that. Often ar can do it too, so ranlib just exists for history sake.
 $(TARGET): CFLAGS += -fPIC
