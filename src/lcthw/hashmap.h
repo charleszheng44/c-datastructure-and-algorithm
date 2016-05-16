@@ -23,7 +23,7 @@ typedef int (*Hashmap_compare)(void *a, void *b);
 typedef uint32_t (*Hashmap_hash)(void *key);
 
 typedef struct Hashmap {
-    DArray *bucket;
+    DArray *buckets;
     Hashmap_compare compare;
     Hashmap_hash hash;
 } Hashmap;

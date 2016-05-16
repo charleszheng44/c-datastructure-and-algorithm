@@ -10,13 +10,14 @@ void ListNode_swap(ListNode *a, ListNode *b) {
 int List_bubble_sort(List *list, List_compare cmp) {
     
     int sorted = 1;
+    int lst_length = list->count;
 
     if(lst_length <= 1) 
 	return 0;
     
     do { 
         sorted = 1; 
-        LIST_FOREACH(list, first, next cur) {
+        LIST_FOREACH(list, first, next, cur) {
             if(cur->next) {
                 if(cmp(cur->value, cur->next->value) > 0) {
                     ListNode_swap(cur, cur->next);
@@ -36,7 +37,7 @@ List *List_merge(List *left, List *right, List_compare comp) {
 
     while(List_count(left) > 0 || List_count(right) > 0) {
     	if(List_count(left) > 0 && List_count(right) > 0) {
-            if(comp(List_first(left)  List_first(right)) <= 0) 
+            if(comp(List_first(left), List_first(right)) <= 0) 
                 val = List_shift(left);
             else 
                 val = List_shift(right); 

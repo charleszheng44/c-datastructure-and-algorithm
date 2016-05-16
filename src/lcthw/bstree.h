@@ -19,7 +19,7 @@ typedef struct BSTree {
     BSTreeNode *root;
 }BSTree;
 
-typedef int (*BSTree_traverse_cb)(BSTree *map);
+typedef int (*BSTree_traverse_cb)(BSTreeNode *node);
 
 BSTree *BSTree_create(BSTree_compare compare);
 void BSTree_destroy(BSTree *map);

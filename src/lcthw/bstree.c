@@ -61,14 +61,12 @@ static inline void BSTree_setnode(BSTree *map, BSTreeNode *node, void *key,
             BSTree_setnode(map, node->left, key, data);
         } else {
             node->left = BSTreeNode_create(node, key, data);
-            check_mem(node->left);
         }
     } else {
         if(node->right) {
             BSTree_setnode(map, node->right, key, data);
         } else {
             node->right = BSTreeNode_create(node, key, data);
-            check_mem(node->right);
         }
     }
 }
@@ -80,6 +78,11 @@ int BSTree_set(BSTree *map, void *key, void *data) {
     } else {
         BSTree_setnode(map, map->root, key, data);
     }
+
+    return 0;
+
+error:
+    return -1;
 }
 
 static inline BSTreeNode *BSTree_getnode(BSTree *map, BSTreeNode *node, void *key) {
@@ -101,11 +104,11 @@ static inline BSTreeNode *BSTree_getnode(BSTree *map, BSTreeNode *node, void *ke
     }
 }
 
-int BSTree_get(BSTree *map, void *key) {
+void *BSTree_get(BSTree *map, void *key) {
     if(map->root == NULL) {
         return NULL;
     } else {
-        BSTreeNode *node = BSTree_getnode(map, root, key);
+        BSTreeNode *node = BSTree_getnode(map, map->root, key);
         return node == NULL ? NULL : node->data;
     }
 }

@@ -3,32 +3,32 @@
 #include <stdlib.h>
 #include <lcthw/dbg.h>
 
-typedef struct Darray {
+typedef struct DArray {
     int end;
     int max;
     size_t element_size;
     size_t expand_rate;
     void **content;
-}Darray;
+}DArray;
 
-Darray *Darray_create(size_t element_size, size_t initial_max);
-void Darray_destroy(Darray *array);
-void Darray_clear(Darray *array);
-int Darray_expand(Darray *array);
-int Darray_contract(Darray *array);
-int Darray_push(Darray *array, void *ele);
-void *Darray_pop(Darray *array);
-void Darray_clear_destory(Darray *array);
+DArray *DArray_create(size_t element_size, size_t initial_max);
+void DArray_destroy(DArray *array);
+void DArray_clear(DArray *array);
+int DArray_expand(DArray *array);
+int DArray_contract(DArray *array);
+int DArray_push(DArray *array, void *ele);
+void *DArray_pop(DArray *array);
+void DArray_clear_destory(DArray *array);
 
-#define Darray_first(A) ((A)->content[0])
-#define Darray_last(A) ((A)->content[(A)->end - 1])
-#define Darray_end(A)  ((A)->end)
-#define Darray_count(A) Darray_end(A)
-#define Darray_max(A)  ((A)->max)
+#define DArray_first(A) ((A)->content[0])
+#define DArray_last(A) ((A)->content[(A)->end - 1])
+#define DArray_end(A)  ((A)->end)
+#define DArray_count(A) DArray_end(A)
+#define DArray_max(A)  ((A)->max)
 
 #define DEFAULT_EXPAND_RATE 300
 
-static inline void Darray_set(Darray *array, int i, void *ele)
+static inline void DArray_set(DArray *array, int i, void *ele)
 {
     check(i > array->max, "darray attempt to set past max.");
     array->content[i] = ele;
@@ -36,22 +36,22 @@ error:
     return;
 }
 
-static inline void Darray_get(Darray *array, int i)
+static inline void *DArray_get(DArray *array, int i)
 {
     check(i > array->max, "darray attempt to set past max.");
     return array->content[i];
 error:
-    return;
+    return NULL;
 }
 
-static inline void *Darray_remove(Darray *array, int i) 
+static inline void *DArray_remove(DArray *array, int i) 
 {
     void *ele = array->content[i];
     array->content = NULL;
     return ele;
 }
 
-static inline void *Darray_new(Darray *array) 
+static inline void *DArray_new(DArray *array) 
 {
     check(array->element_size > 0, "Can't use DArray_new on 0 size darrays.");
     return calloc(1, array->element_size);    
@@ -59,6 +59,6 @@ error:
     return NULL;
 }
 
-#define Darray_free(E) free((E))
+#define DArray_free(E) free((E))
 
 #endif
