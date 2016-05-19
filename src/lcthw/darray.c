@@ -4,12 +4,12 @@
 DArray *DArray_create(size_t element_size, size_t initial_max)
 {
     DArray *array = malloc(sizeof(DArray));
-    check_meme(array);
+    check_mem(array);
     array->max = initial_max;
     check(array->max > 0, "You must set an initial_max > 0.");
 
     array->content = calloc(initial_max, sizeof(void *));
-    check_meme(array->content);
+    check_mem(array->content);
 
     array->end = 0;
     array->element_size = element_size; 
@@ -40,7 +40,7 @@ static inline int DArray_resize(DArray *array, size_t newsize)
 
     void *content = realloc(array->content, array->max * sizeof(void *)); 
     
-    check_meme(content); 
+    check_mem(content); 
     array->content = content;
     return 0;
 
