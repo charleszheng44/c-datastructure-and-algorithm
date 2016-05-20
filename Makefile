@@ -1,5 +1,5 @@
 # gcc -D defines a macro to be used by the preprocessor
-CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
+CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG -Wl,--no-as-needed -ldl $(OPTFLAGS)
 # Link the library
 LIBS=-ldl $(OPTLIBS)
 # default prefix
