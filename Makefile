@@ -60,7 +60,7 @@ build:
 # The Unit Tests
 # .PHONY means tests is not a file
 .PHONY: tests
-tests: CFLAGS += $(TARGET)
+tests: CFLAGS += $(SO_TARGET)
 tests: $(TESTS)
 	sh ./tests/runtests.sh
 
