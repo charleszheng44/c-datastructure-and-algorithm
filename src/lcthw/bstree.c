@@ -193,7 +193,7 @@ static inline BSTreeNode* BSTree_node_delete(BSTree *map, BSTreeNode *node,
     } else {
         if(node->left && node->right) {
           BSTreeNode *successor = BSTree_find_min(node);
-          // exchange the content of node and the successor
+          // exchange the contents of node and the successor
           BSTree_swap(node, successor);
           // old successor may have a right child
           BSTree_replace_node_in_parent(map, successor, successor->right);

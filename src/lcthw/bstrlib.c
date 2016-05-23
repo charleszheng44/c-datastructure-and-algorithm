@@ -181,7 +181,7 @@ int ballocmin (bstring b, int len) {
 
 /*  bstring bfromcstr (const char * str)
  *
- *  Create a bstring which contains the contents of the '\0' terminated char *
+ *  Create a bstring which contains the contentss of the '\0' terminated char *
  *  buffer str.
  */
 bstring bfromcstr (const char * str) {
@@ -208,7 +208,7 @@ size_t j;
 
 /*  bstring bfromcstralloc (int mlen, const char * str)
  *
- *  Create a bstring which contains the contents of the '\0' terminated char *
+ *  Create a bstring which contains the contentss of the '\0' terminated char *
  *  buffer str.  The memory buffer backing the string is at least len 
  *  characters in length.
  */
@@ -238,7 +238,7 @@ size_t j;
 
 /*  bstring blk2bstr (const void * blk, int len)
  *
- *  Create a bstring which contains the content of the block blk of length 
+ *  Create a bstring which contains the contents of the block blk of length 
  *  len.
  */
 bstring blk2bstr (const void * blk, int len) {
@@ -269,7 +269,7 @@ int i;
 
 /*  char * bstr2cstr (const_bstring s, char z)
  *
- *  Create a '\0' terminated char * buffer which is equal to the contents of 
+ *  Create a '\0' terminated char * buffer which is equal to the contentss of 
  *  the bstring s, except that any contained '\0' characters are converted 
  *  to the character in z. This returned value should be freed with a 
  *  bcstrfree () call, by the calling application.
@@ -446,7 +446,7 @@ int i,j;
 
 /*  int bassign (bstring a, const_bstring b)
  *
- *  Overwrite the string a with the contents of string b.
+ *  Overwrite the string a with the contentss of string b.
  */
 int bassign (bstring a, const_bstring b) {
 	if (b == NULL || b->data == NULL || b->slen < 0)
@@ -466,7 +466,7 @@ int bassign (bstring a, const_bstring b) {
 
 /*  int bassignmidstr (bstring a, const_bstring b, int left, int len)
  *
- *  Overwrite the string a with the middle of contents of string b 
+ *  Overwrite the string a with the middle of contentss of string b 
  *  starting from position left and running for a length len.  left and 
  *  len are clamped to the ends of b as with the function bmidstr.
  */
@@ -498,7 +498,7 @@ int bassignmidstr (bstring a, const_bstring b, int left, int len) {
 
 /*  int bassigncstr (bstring a, const char * str)
  *
- *  Overwrite the string a with the contents of char * string str.  Note that 
+ *  Overwrite the string a with the contentss of char * string str.  Note that 
  *  the bstring a must be a well defined and writable bstring.  If an error 
  *  occurs BSTR_ERR is returned however a may be partially overwritten.
  */
@@ -527,7 +527,7 @@ size_t len;
 
 /*  int bassignblk (bstring a, const void * s, int len)
  *
- *  Overwrite the string a with the contents of the block (s, len).  Note that 
+ *  Overwrite the string a with the contentss of the block (s, len).  Note that 
  *  the bstring a must be a well defined and writable bstring.  If an error 
  *  occurs BSTR_ERR is returned and a is not overwritten.
  */
@@ -562,7 +562,7 @@ int btrunc (bstring b, int n) {
 
 /*  int btoupper (bstring b)
  *
- *  Convert contents of bstring to upper case.
+ *  Convert contentss of bstring to upper case.
  */
 int btoupper (bstring b) {
 int i, len;
@@ -576,7 +576,7 @@ int i, len;
 
 /*  int btolower (bstring b)
  *
- *  Convert contents of bstring to lower case.
+ *  Convert contentss of bstring to lower case.
  */
 int btolower (bstring b) {
 int i, len;
@@ -825,10 +825,10 @@ int i;
 /*  int biseqcstr (const_bstring b, const char *s)
  *
  *  Compare the bstring b and char * string s.  The C string s must be '\0' 
- *  terminated at exactly the length of the bstring b, and the contents 
+ *  terminated at exactly the length of the bstring b, and the contentss 
  *  between the two must be identical with the bstring b with no '\0' 
- *  characters for the two contents to be considered equal.  This is 
- *  equivalent to the condition that their current contents will be always be 
+ *  characters for the two contentss to be considered equal.  This is 
+ *  equivalent to the condition that their current contentss will be always be 
  *  equal when comparing them in the same format after converting one or the 
  *  other.  If the strings are equal 1 is returned, if they are unequal 0 is 
  *  returned and if there is a detectable error BSTR_ERR is returned.
@@ -845,10 +845,10 @@ int i;
 /*  int biseqcstrcaseless (const_bstring b, const char *s)
  *
  *  Compare the bstring b and char * string s.  The C string s must be '\0' 
- *  terminated at exactly the length of the bstring b, and the contents 
+ *  terminated at exactly the length of the bstring b, and the contentss 
  *  between the two must be identical except for case with the bstring b with 
- *  no '\0' characters for the two contents to be considered equal.  This is 
- *  equivalent to the condition that their current contents will be always be 
+ *  no '\0' characters for the two contentss to be considered equal.  This is 
+ *  equivalent to the condition that their current contentss will be always be 
  *  equal ignoring case when comparing them in the same format after 
  *  converting one or the other.  If the strings are equal, except for case, 
  *  1 is returned, if they are unequal regardless of case 0 is returned and 
@@ -1276,19 +1276,19 @@ int i;
 #define LONG_TYPE unsigned char
 
 #define CFCLEN ((1 << CHAR_BIT) / LONG_BITS_QTY)
-struct charField { LONG_TYPE content[CFCLEN]; };
-#define testInCharField(cf,c) ((cf)->content[(c) >> LONG_LOG_BITS_QTY] & (((long)1) << ((c) & (LONG_BITS_QTY-1))))
+struct charField { LONG_TYPE contents[CFCLEN]; };
+#define testInCharField(cf,c) ((cf)->contents[(c) >> LONG_LOG_BITS_QTY] & (((long)1) << ((c) & (LONG_BITS_QTY-1))))
 #define setInCharField(cf,idx) { \
 	unsigned int c = (unsigned int) (idx); \
-	(cf)->content[c >> LONG_LOG_BITS_QTY] |= (LONG_TYPE) (1ul << (c & (LONG_BITS_QTY-1))); \
+	(cf)->contents[c >> LONG_LOG_BITS_QTY] |= (LONG_TYPE) (1ul << (c & (LONG_BITS_QTY-1))); \
 }
 
 #else
 
 #define CFCLEN (1 << CHAR_BIT)
-struct charField { unsigned char content[CFCLEN]; };
-#define testInCharField(cf,c) ((cf)->content[(unsigned char) (c)])
-#define setInCharField(cf,idx) (cf)->content[(unsigned int) (idx)] = ~0
+struct charField { unsigned char contents[CFCLEN]; };
+#define testInCharField(cf,c) ((cf)->contents[(unsigned char) (c)])
+#define setInCharField(cf,idx) (cf)->contents[(unsigned int) (idx)] = ~0
 
 #endif
 
@@ -1296,7 +1296,7 @@ struct charField { unsigned char content[CFCLEN]; };
 static int buildCharField (struct charField * cf, const_bstring b) {
 int i;
 	if (b == NULL || b->data == NULL || b->slen <= 0) return BSTR_ERR;
-	memset ((void *) cf->content, 0, sizeof (struct charField));
+	memset ((void *) cf->contents, 0, sizeof (struct charField));
 	for (i=0; i < b->slen; i++) {
 		setInCharField (cf, b->data[i]);
 	}
@@ -1305,7 +1305,7 @@ int i;
 
 static void invertCharField (struct charField * cf) {
 int i;
-	for (i=0; i < CFCLEN; i++) cf->content[i] = ~cf->content[i];
+	for (i=0; i < CFCLEN; i++) cf->contents[i] = ~cf->contents[i];
 }
 
 /* Inner engine for binchr */
@@ -1774,7 +1774,7 @@ int i, d;
 /*  int breada (bstring b, bNread readPtr, void * parm)
  *
  *  Use a finite buffer fread-like function readPtr to concatenate to the 
- *  bstring b the entire contents of file-like source data in a roughly 
+ *  bstring b the entire contentss of file-like source data in a roughly 
  *  efficient way.
  */
 int breada (bstring b, bNread readPtr, void * parm) {
@@ -1799,7 +1799,7 @@ int i, l, n;
 /*  bstring bread (bNread readPtr, void * parm)
  *
  *  Use a finite buffer fread-like function readPtr to create a bstring 
- *  filled with the entire contents of file-like source data in a roughly 
+ *  filled with the entire contentss of file-like source data in a roughly 
  *  efficient way.
  */
 bstring bread (bNread readPtr, void * parm) {
@@ -2929,7 +2929,7 @@ int n, r;
  *  replaced with arglist, which has been initialized by the va_start macro.
  *  The size of the appended output is upper bounded by count.  If the 
  *  required output exceeds count, the string b is not augmented with any 
- *  contents and a value below BSTR_ERR is returned.  If a value below -count 
+ *  contentss and a value below BSTR_ERR is returned.  If a value below -count 
  *  is returned then it is recommended that the negative of this value be 
  *  used as an update to the count in a subsequent pass.  On other errors, 
  *  such as running out of memory, parameter errors or numeric wrap around 
@@ -2937,7 +2937,7 @@ int n, r;
  *  generated and appended to b.
  *
  *  Note: There is no sanity checking of arglist, and this function is
- *  destructive of the contents of b from the b->slen point onward.  If there 
+ *  destructive of the contentss of b from the b->slen point onward.  If there 
  *  is an early generation of a '\0' character, the bstring will be truncated 
  *  to this end point.
  */
