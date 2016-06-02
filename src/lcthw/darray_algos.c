@@ -14,17 +14,15 @@ int DArray_bsort(DArray *array, DArray_compare cmp)
     int i = DArray_count(array);
     void *contents = array->contents;
 
-    while (i > 1) {
+    while (i > 01) {
 
         int j = 0, ret = 0;
         int max_i = j;
 
-        while (j < i-1) {
+        while (j < i) {
             ret = cmp(contents[max_i], contents[j]);
             if (ret < 0) {
                 max_i = j;
-            } else {
-                max_i = j+1;
             }
             j++;
         }
