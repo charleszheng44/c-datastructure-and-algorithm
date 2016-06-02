@@ -12,19 +12,24 @@ static void swap(DArray *array, int a, int b)
 int DArray_bsort(DArray *array, DArray_compare cmp)
 {
     int i = DArray_count(array);
-    while (i > 0) {
+    void *contents = array->contents;
 
-        int max_i = 0;
-        int ret = 0;
+    while (i > 1) {
 
-        for (j = 1; j < i-1; j++) {
-            ret = cmp(array[max_i], array[j]);
+        int j = 0, ret = 0;
+        int max_i = j;
+
+        while (j < i-1) {
+            ret = cmp(contents[max_i], contents[j]);
             if (ret < 0) {
                 max_i = j;
+            } else {
+                max_i = j+1;
             }
+            j++;
         }
 
-        if(max_i != i) {
+        if(max_i != i && (cmp(contents[max_i], contents[i]) > 0)) {
             swap(array, max_i, i);
         }
 
