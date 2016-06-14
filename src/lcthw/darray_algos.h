@@ -5,10 +5,8 @@
 
 typedef int (*DArray_compare)(const void *a, const void *b);
 
-int DArray_bsort(DArray *array, DArray_compare cmp);
+int DArray_ssort(DArray *array, DArray_compare cmp);
 
 int DArray_qsort(DArray *array, DArray_compare cmp);
-
-int DArray_heapsort(DArray *array, DArray_compare cmp);
 
 #endif
