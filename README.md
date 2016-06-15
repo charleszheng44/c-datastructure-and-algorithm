@@ -5,9 +5,12 @@ Part of the data structures and algorithms are from LCTHW as well.
 ## List of contents
 
 ### Data structure
-Dynamic array
-Double link list
-Heap
-Binary search tree
+1. Dynamic array
+
+2. Double link list
+
+3. Heap
+
+4. Binary search tree
 
 ### Algorithm 
