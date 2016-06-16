@@ -13,4 +13,6 @@ Part of the data structures and algorithms are from LCTHW as well.
 
 4. Binary search tree
 
+5. Hash table
+
 ### Algorithm 
